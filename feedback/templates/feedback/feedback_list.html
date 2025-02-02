@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>All Feedback</h1>
+        <ul>
+            {% for feedback in feedbacks %}
+                <li><strong>{{ feedback.student_name }}</strong>: {{ feedback.feedback_text }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
