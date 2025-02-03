@@ -1,19 +1,42 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Feedback List</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>All Feedback</h1>
-        <ul>
-            {% for feedback in feedbacks %}
-                <li><strong>{{ feedback.student_name }}</strong>: {{ feedback.feedback_text }}</li>
-            {% endfor %}
-        </ul>
+{% extends 'feedback/base.html' %}
+
+{% block title %}All Feedback{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Recent Feedback</h1>
+        <p class="subtitle">What our students are saying</p>
     </div>
-</body>
-</html>
+
+    <div class="list-card">
+        <div class="feedback-grid">
+            {% for feedback in feedbacks %}
+            <div class="feedback-item">
+                <div class="feedback-header">
+                    <div class="avatar">{{ feedback.student_name|make_list|first }}</div>
+                    <div class="feedback-author">
+                        <h3>{{ feedback.student_name }}</h3>
+                        <span class="feedback-date">{{ feedback.created_at|date:"M d, Y" }}</span>
+                        <div class="feedback-meta">
+                            <span class="roll-number">{{ feedback.roll_number }}</span>
+                            <span class="contact">{{ feedback.contact_number }}</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="feedback-text">{{ feedback.feedback_text }}</p>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <p>No feedback available yet</p>
+                <a href="{% url 'feedback:feedback_form' %}" class="submit-button">Submit Feedback</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

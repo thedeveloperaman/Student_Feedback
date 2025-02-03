@@ -1,0 +1,23 @@
+# Django #
+*.log
+*.pot
+*.pyc
+*.pyo
+__pycache__/
+db.sqlite3
+media/
+local_settings.py
+ven/
+staticfiles/
+node_modules/
+.env
+.env.example
+coverage.xml
+.tox/
+.nox/
+.pytest_cache/
+nosetests.xml
+*.egg-info/
+dist/
+build/
+*.spec
